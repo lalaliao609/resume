@@ -1,0 +1,607 @@
+html{ scroll-behavior:smooth; }
+
+/* 排版  */
+.container{  
+    max-width:1100px; 
+    margin-inline:auto; 
+    padding:24px;
+}
+
+.stack{ 
+    display:grid; 
+    gap:clamp(16px,3vw,28px);
+}
+
+article.stack{
+  max-width:1100px;          /* 寬度上限，和 .container 一樣 */
+  margin:24px auto;          /* 上下 24px 留白，左右自動置中 */
+  padding-inline:24px;       /* 左右稍微縮進，不要貼到邊緣 */
+}
+
+body{
+  font-family: "LXGW WenKai TC", "Noto Sans TC", sans-serif;
+  line-height: 1.6;
+  margin: 0px;
+  background-color: #b2c9ba ;
+  color:#fdebde ;
+  line-height: 1.6;
+}
+.section-surface{
+    background: #889d85;  
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 10px 30px rgba(2,6,23,.35);
+}
+  .section-head{ display:flex; align-items:center; gap:12px; }
+  .section-head hr{ flex:1; height:1px; background:#203044; border:none; }
+
+  nav{
+    position:sticky; top:0; z-index:100;
+    backdrop-filter:saturate(160%) blur(8px);
+    background:rgba(8,12,20,.6);
+    border-bottom:1px solid #203044;
+    border-bottom-left-radius:10px;
+    border-bottom-right-radius:10px;
+    margin-bottom:8px;
+}
+
+  .nav-inner{   /* 導覽列內容布局 */
+    display:flex; 
+    align-items:center; 
+    justify-content:space-between;  /*左右兩邊自動拉開、貼齊兩側。*/
+    gap:16px; 
+}
+
+  .brand{  /*左邊的 Logo*/
+    font-weight:700; 
+    letter-spacing:.3px; 
+    font-size:clamp(18px,2vw,20px); 
+}
+
+  .menu{  /* 右邊的按鈕區 */
+    display:flex; 
+    gap:8px; 
+    list-style:none; 
+    padding:0;  /*移除 <ul> 預設縮排。*/
+    margin:0; 
+  }
+  .menu a{ /*按鈕的樣式*/
+    display:inline-flex; 
+    align-items:center; 
+    gap:8px; 
+    padding:10px 14px;
+    border-radius:12px; 
+    text-decoration:none; 
+    color:#e6edf3; 
+    border:1px solid transparent;
+  }
+  .menu a:hover{ background:#111823; border-color:#203044; }
+  .menu a:focus-visible{ outline:2px solid #60a5fa; outline-offset:2px; }
+  
+/* About 區塊：左圖右文排版 */
+.about{
+  display:flex;
+  flex-direction:column; /* 改成上下排列 */
+  align-items:center;     /* 水平置中 */
+  text-align:center;      /* 文字置中 */
+  gap:24px;
+}
+
+/* 頭貼樣式 */
+.avatar{
+  width:140px;
+  height:140px;
+  border-radius:50%;
+  object-fit:cover;
+  object-position:center;
+  background:linear-gradient(#1e293b, #0b1220);
+  border:1px solid #203044;
+  box-shadow:0 10px 30px rgba(2,6,23,.35);
+}
+
+/* 右邊文字卡片 */
+.about-card{
+  flex:1;
+  background:transparent;          /* 不再多一層實心底色 */
+  padding:0;
+  border:none;
+}
+
+/* About 清單 */
+.about-list{
+  list-style: none;
+  margin:0;
+  padding-left:1.2rem;
+}
+.about-list li{
+  margin:4px 0;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: aboutFade 0.6s ease-out forwards;
+}
+.about-list li:nth-child(1){ animation-delay: .1s; }
+.about-list li:nth-child(2){ animation-delay: .22s; }
+.about-list li:nth-child(3){ animation-delay: .34s; }
+.about-list li:nth-child(4){ animation-delay: .46s; }
+
+@keyframes aboutFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 聯繫方式：圖片排成一排 */
+.contact-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:14px;
+  justify-content:center;
+}
+
+/* 每一個圖片按鈕本身是 <a>，包著一張長方形圖片 */
+.contact-row a{
+  display:inline-block;
+  text-decoration:none;
+}
+
+/* 長方形圖片樣式 */
+.contact-row img{
+  display:block;
+  height:48px;            /* 圖片高度，寬度依比例自動 */
+  border-radius:10px;
+  border:1px solid #203044;
+  box-shadow:0 6px 16px rgba(2,6,23,.45);
+  transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+/* 滑鼠移上去圖片放大一點、發亮一點 */
+.contact-row a:hover img{
+  transform:scale(1.05);
+  border-color:#60a5fa;
+  box-shadow:0 10px 22px rgba(15,23,42,.7);
+}
+
+/* 手機版：頭貼改成上下排 */
+@media (max-width:768px){
+  .about{
+    flex-direction:column;
+  }
+  .avatar{
+    width:120px;
+    height:120px;
+  }
+}
+
+
+/* 圓形技能容器 */
+.skill-circles{
+    display:flex;
+    flex-wrap:wrap;
+    gap:24px;
+    justify-content:center;
+  }
+  
+  /* 每個圓形外框 */
+  .circle_frame{
+    width:160px;
+    height:160px;
+    position:relative;
+    cursor:pointer;
+    transition:transform .3s;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  
+  
+  /* 旋轉 90 度：讓圓從 12 點方向開始 */
+  .circle_frame:hover{
+    transform:scale(1.15);
+  }
+  
+  svg{
+    transform:rotate(-90deg);
+  }
+  /* 圓的共同樣式 */
+  .ring{
+    fill:none;
+    stroke-width:14;
+  }
+  
+  .ring.bg{
+    stroke:#889d85;
+  }
+  
+  .ring.fg{
+    stroke:#fdebde;
+    stroke-dasharray:440;   /* r=70 → 周長約 440 */
+    stroke-dashoffset:440;  /* 初始 0% */
+    stroke-linecap:round;
+  }
+  
+  /* 圓中央的文字 */
+  .text{
+    position:absolute;
+    text-align:center;
+    color: #e5e2de;
+  }
+
+  /* statistics */
+  .circle80 .ring.fg{ animation: c80 1.2s ease-out forwards; }
+  .circle80:hover .ring.fg{ animation: c80b 1.2s ease-out forwards; }
+  @keyframes c80{ to{ stroke-dashoffset:88; } }
+  @keyframes c80b{ to{ stroke-dashoffset:88; } }
+
+  /* R */
+  .circle30 .ring.fg{ animation: c30 1.2s ease-out forwards; }
+  .circle30:hover .ring.fg{ animation: c30b 1.2s ease-out forwards; }
+  @keyframes c30{ to{ stroke-dashoffset:308; } }  /* 440*(1-0.3) */
+  @keyframes c30b{ to{ stroke-dashoffset:308; } }
+
+  /* JAVA */
+  .circle50 .ring.fg{ animation: c50 1.2s ease-out forwards; }
+  .circle50:hover .ring.fg{ animation: c50b 1.2s ease-out forwards; }
+  @keyframes c50{ to{ stroke-dashoffset:220; } }
+  @keyframes c50b{ to{ stroke-dashoffset:220; } }
+
+  /* HTML */
+  .circle60 .ring.fg{ animation: c60 1.2s ease-out forwards; }
+  .circle60:hover .ring.fg{ animation: c60b 1.2s ease-out forwards; }
+  @keyframes c60{ to{ stroke-dashoffset:176; } }
+  @keyframes c60b{ to{ stroke-dashoffset:176; } }
+ 
+  
+  /* 長條技能 */
+  .skill-bars{ display:grid; gap:16px; margin-top:12px; }
+  .bar-group{
+    display:grid;
+    grid-template-columns: 160px 1fr 56px;
+    align-items:center;
+    gap:10px;
+  }
+  
+  .bar{
+    width:100%;
+    height:14px;
+    border-radius:999px;
+    background:#889d85;
+    overflow:hidden;
+  }
+  .bar span{
+    display:block;
+    width:0%;
+    height:100%;
+    background:#fdebde;
+    transition:width 1s ease-out;
+    border-right:1px solid rgba(255,255,255,.2);
+  }
+ 
+  /* 教育 */
+  .bar85 .bar span{ animation: b85 1s ease-out forwards; }
+  .bar85:hover .bar span{ animation: b85b 1s ease-out forwards; }
+  @keyframes b85{ to{ width:85%; } }
+  @keyframes b85b{ to{ width:85%; } }
+
+  /* 領導 */
+  .bar60 .bar span{ animation: b60 1s ease-out forwards; }
+  .bar60:hover .bar span{ animation: b60b 1s ease-out forwards; }
+  @keyframes b60{ to{ width:60%; } }
+  @keyframes b60b{ to{ width:60%; } }
+
+  /* 日文 */
+  .bar30 .bar span{ animation: b30 1s ease-out forwards; }
+  .bar30:hover .bar span{ animation: b30b 1s ease-out forwards; }
+  @keyframes b30{ to{ width:30%; } }
+  @keyframes b30b{ to{ width:30%; } }
+
+/* ========================= */
+/*      Experiences 區塊     */
+/* ========================= */
+
+/* 共用：每個經驗 article 的基本排版 */
+.exp{
+  display:grid;
+  gap:16px;
+  margin-top:24px;
+}
+
+/* 小標題區：標題 + 副標（日期／分類） */
+.exp-head{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  gap:4px;
+  align-items:baseline;
+}
+.exp-head h3{
+  margin:0;
+  font-size:18px;
+}
+.exp-head .muted{
+  margin:0;
+  font-size:14px;
+}
+
+/* ===== Experience 1：Gallery 版面 ===== */
+
+.exp-feature{
+  display:grid;
+  gap:16px;
+}
+
+.exp-summary{
+  margin:0;
+  color:#e6edf3;
+  font-size:15px;
+}
+
+.exp-desc{
+  margin:0;
+  color:#cbd5f5;
+  font-size:14px;
+}
+
+/* Gallery 網格：圖片＋影片排版 */
+.exp-gallery{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:16px;
+}
+
+/* 每一張圖／每一個單元卡片 */
+.exp-item{
+  background:#0f1724;
+  border:1px solid #203044;
+  border-radius:14px;
+  padding:10px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  box-shadow:0 6px 20px rgba(2,6,23,.35);
+  transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+/* 圖片本體 */
+.exp-item img{
+  width:100%;
+  display:block;
+  border-radius:10px;
+  object-fit:cover;
+}
+
+/* Hover：微微浮起＆高亮 */
+.exp-item:hover{
+  transform:translateY(-4px);
+  box-shadow:0 10px 26px rgba(15,23,42,.7);
+  border-color:#60a5fa;
+}
+
+/* 圖片下面的小文字 & 影片描述 */
+.exp-item figcaption,
+.video-caption{
+  margin:0;
+  font-size:13px;
+  color:#cbd5f5;
+}
+
+/* 影片容器：保持 16:9 比例，RWD 自適應 */
+.exp-video{
+  padding:10px;
+}
+
+.video-frame{
+  position:relative;
+  width:100%;
+  padding-top:56.25%;  /* 16:9 ratio */
+  border-radius:10px;
+  overflow:hidden;
+  background:#020617;
+}
+
+.video-frame iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+}
+
+/* ===== PDF 預覽框架（Exp 2 用） ===== */
+
+.pdf-frame{
+  width:100%;
+  height:240px;
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid #203044;
+  background:#0f1724;
+}
+
+.pdf-frame iframe{
+  width:100%;
+  height:100%;
+  border:none;
+}
+
+/* ===== 第二個經驗區塊：教育經驗 ===== */
+
+.edu-exp{
+  display:grid;
+  gap:24px;
+}
+
+.edu-item{
+  display:grid;
+  grid-template-columns: 260px 1fr;
+  gap:20px;
+  background:#0f1724;
+  border:1px solid #203044;
+  border-radius:16px;
+  padding:16px;
+  box-shadow:0 8px 22px rgba(2,6,23,.35);
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.edu-item:hover{
+  transform:translateY(-4px);
+  box-shadow:0 12px 30px rgba(15,23,42,.55);
+  border-color:#60a5fa;
+}
+
+/* Exp-2 左側圖片（教師研習） */
+.edu-img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  border-radius:12px;
+}
+
+.edu-text h4{
+  margin-top:0;
+  font-size:18px;
+  color:#e6edf3;
+}
+
+.edu-text p{
+  margin:8px 0;
+  color:#cbd5f5;
+  line-height:1.6;
+}
+
+/* ===== 第三個經驗區塊：目前持續精進 ===== */
+
+.current-exp{
+  display:grid;
+  gap:20px;
+}
+
+.current-list{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:16px;
+}
+
+.current-item{
+  background:#0f1724;
+  border:1px solid #203044;
+  border-radius:16px;
+  padding:12px;
+  text-align:center;
+  box-shadow:0 6px 20px rgba(2,6,23,.35);
+  transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+/* Exp-3 用的圖片 */
+.exp-img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  border-radius:12px;
+  margin-bottom:8px;
+}
+
+.current-item h4{
+  margin:4px 0 0;
+  font-size:15px;
+  color:#e6edf3;
+}
+
+.current-item:hover{
+  transform:translateY(-4px);
+  box-shadow:0 10px 26px rgba(15,23,42,.7);
+  border-color:#60a5fa;
+}
+
+/* ===== Experiences RWD 調整 ===== */
+@media (max-width:768px){
+
+  .exp-summary,
+  .exp-desc{
+    font-size:14px;
+  }
+
+  .exp-gallery{
+    gap:12px;
+  }
+
+  .exp-item{
+    padding:8px;
+  }
+
+  .pdf-frame{
+    height:300px;
+  }
+
+  .edu-item{
+    grid-template-columns:1fr;
+  }
+
+  .edu-img,
+  .exp-img{
+    height:200px;
+  }
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+  margin-top:24px;
+}
+
+footer hr{
+  border:0;
+  border-top:1px solid #203044;
+  width:70%;
+  margin:8px auto 12px;
+}
+
+/* ===== Back to Top Button  */
+.back-to-top{
+  position:fixed;
+  right:28px;
+  bottom:28px;
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  background:rgba(30,41,59,0.85); /* 深色透明 */
+  backdrop-filter:blur(4px);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border:1px solid #334155;
+  box-shadow:0 6px 16px rgba(0,0,0,0.45);
+  cursor:pointer;
+  z-index:200;
+  transition:transform .25s ease, background .25s ease, box-shadow .25s ease;
+}
+
+.back-to-top img{
+  width:60%;
+  height:60%;
+  border-radius:50%;
+  object-fit:contain;
+  pointer-events:none; /*不要干擾滑鼠事件*/
+}
+
+/* 滑鼠移上去變大、變亮 */
+.back-to-top:hover{
+  transform:scale(1.22);
+  background:rgba(51,65,85,0.95);
+  box-shadow:0 10px 26px rgba(0,0,0,0.6);
+}
+
+/* 手機版大小調整 */
+@media (max-width:768px){
+  .back-to-top{
+    width:44px;
+    height:44px;
+    right:20px;
+    bottom:20px;
+  }
+}
